@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Checker</title>
+</head>
+<body>
+
+<h2>🔍 URL Risk Analyzer</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="url" placeholder="Enter URL" required>
+    <button type="submit">Check</button>
+</form>
+
+{% if result %}
+    <h3>Result:</h3>
+    <p><strong>Risk:</strong> {{ result.risk_level }} (Score: {{ result.score }})</p>
+
+    <ul>
+        {% for reason in result.reasons %}
+            <li>{{ reason }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<hr>
+
+<h3>History</h3>
+
+<a href="/">All</a> |
+<a href="?filter=high">High Risk</a> |
+<a href="?filter=safe">Safe</a>
+
+<ul>
+    {% for scan in scans %}
+        <li>
+            {{ scan.url }} → {{ scan.risk_level }}
+        </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
