@@ -3,7 +3,6 @@ import uuid
 from datetime import datetime
 import os
 
-
 COSMOS_URI = os.getenv("COSMOS_URI")
 COSMOS_KEY = os.getenv("COSMOS_KEY")
 COSMOS_DATABASE = os.getenv("COSMOS_DATABASE", "url_database")
